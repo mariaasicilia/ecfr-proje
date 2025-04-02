@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="eCFR Dashboard - Visualizing word counts across different agencies in the Electronic Code of Federal Regulations">
+    <title>eCFR Dashboard</title>
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="styles/main.css" as="style">
+    <link rel="preload" href="components/Chart.js" as="script">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap">
+    
+    <!-- Defer non-critical scripts -->
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <!-- App Shell -->
+    <div id="app">
+        <header class="header">
+            <h1>E-Code of Federal Regulations Dashboard</h1>
+            <div id="loading-indicator" class="loading-indicator hidden">Loading...</div>
+        </header>
+
+        <main class="main-content">
+            <!-- Controls Section -->
+            <section class="controls-section">
+                <div class="sort-buttons" role="group" aria-label="Sort options">
+                    <button id="sortName" class="active" aria-pressed="true">Sort by Agency Name</button>
+                    <button id="sortCount" aria-pressed="false">Sort by Largest Word Count</button>
+                </div>
+                
+                <div class="search-container">
+                    <input type="text" 
+                           id="searchInput" 
+                           class="search-input" 
+                           placeholder="Search agencies..." 
+                           aria-label="Search agencies">
+                </div>
+            </section>
+
+            <!-- Chart Section -->
+            <section class="chart-section">
+                <h2>Word Count by Agency</h2>
+                <div class="chart-container">
+                    <canvas id="aggregatedChart" aria-label="Word count chart" role="img"></canvas>
+                </div>
+            </section>
+
+            <!-- Grid Section -->
+            <section class="grid-section">
+                <div class="grid-container">
+                    <div id="tileGrid" class="tiles-container">
+                        <!-- Tiles will be dynamically populated -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>Data sourced from the Electronic Code of Federal Regulations (eCFR)</p>
+        </footer>
+    </div>
+
+    <!-- Error Template -->
+    <template id="error-template">
+        <div class="error-message">
+            <p>Error loading data. Please try again later.</p>
+            <button class="retry-button">Retry</button>
+        </div>
+    </template>
+
+    <!-- Load modular JavaScript -->
+    <script type="module" src="utils/constants.js"></script>
+    <script type="module" src="utils/helpers.js"></script>
+    <script type="module" src="components/Chart.js"></script>
+    <script type="module" src="components/Grid.js"></script>
+    <script type="module" src="components/Search.js"></script>
+    <script type="module" src="app.js"></script>
+</body>
+</html> 
